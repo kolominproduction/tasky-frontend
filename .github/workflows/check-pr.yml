@@ -3,8 +3,8 @@ name: Pull requests
 on:
   pull_request:
 
-env:
-  COMMIT_ID: ${{ github.event.head_commit.id }}
+# env:
+#   COMMIT_ID: ${{ steps.get_commit_id.outputs.commit_id }}
 
 permissions:
   contents: read
@@ -37,10 +37,10 @@ jobs:
       - name: Linting Styles
         run: npm run lint:css
       - name: Testing unit
-        if: always()
         run: npm run test:unit
+        if: always()
       - name: Rename report file
-        run: mv reports/jest/report.html reports/jest/unit_${COMMIT_ID}.html
+        run: mv reports/jest/report.html reports/jest/unit_${{ github.sha }}.html
         if: always()
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -55,8 +55,8 @@ jobs:
         uses: actions/deploy-pages@v4
         if: always()
       - name: Report URL
-        run: echo "${{ steps.deployment.outputs.page_url }}unit_${{ github.event.head_commit.id }}.html" >> $GITHUB_OUTPUT
+        run: echo "${{ steps.deployment.outputs.page_url }}unit_${{ github.sha }}.html" >> $GITHUB_OUTPUT
         if: always()
       - name: COMMIT_ID
-        run: echo "${{ github.event.head_commit.id }}"
+        run: echo "${{ github.sha }}"
         if: always()
