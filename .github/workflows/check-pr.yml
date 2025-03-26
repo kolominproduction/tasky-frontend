@@ -3,9 +3,6 @@ name: Pull requests
 on:
   pull_request:
 
-# env:
-#   COMMIT_ID: ${{ steps.get_commit_id.outputs.commit_id }}
-
 permissions:
   contents: read
   pages: write
@@ -55,8 +52,5 @@ jobs:
         uses: actions/deploy-pages@v4
         if: always()
       - name: Report URL
-        run: echo "${{ steps.deployment.outputs.page_url }}unit_${{ github.sha }}.html" >> $GITHUB_OUTPUT
-        if: always()
-      - name: COMMIT_ID
-        run: echo "${{ github.sha }}"
+        run: echo "${{ steps.deployment.outputs.page_url }}unit_${{ github.sha }}.html"
         if: always()
