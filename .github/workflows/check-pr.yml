@@ -54,3 +54,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: always()
+      - name: Report URL
+        run: echo "${{ steps.deployment.outputs.page_url }}/unit_${COMMIT_ID}.html" >> $GITHUB_OUTPUT
