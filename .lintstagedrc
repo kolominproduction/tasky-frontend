@@ -1,5 +1,5 @@
 {
   "**/*.{ts,tsx,json}": "npx prettier --write",
-  "./src/**/!(*spec|*test|*d).{ts,tsx}": "npx eslint --fix",
-  "./src/**/*.css": "npx stylelint"
+  "./src/**/!(*spec|*test|*d).{ts,tsx}": "npm run lint:ts:fix",
+  "./src/**/*.css": "npm run lint:css:fix"
 }

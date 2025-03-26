@@ -1,7 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  ignoreFiles: ['build/**/*.css', './src/app/styles/normalize.css'],
+  ignoreFiles: ['build/**/*.css', './src/app/styles/normalize.css', 'node_modules/'],
   plugins: ['stylelint-order', 'stylelint-declaration-strict-value'],
   rules: {
     'scale-unlimited/declaration-strict-value': [
