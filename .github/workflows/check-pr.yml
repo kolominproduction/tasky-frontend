@@ -1,0 +1,56 @@
+name: Pull requests
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x.x
+          cache: npm
+      - name: Installing
+        run: npm ci
+      - name: Linting TypeScript
+        run: npm run lint:ts
+        if: always()
+      - name: Linting Styles
+        run: npm run lint:css
+      - name: Testing unit
+        run: npm run test:unit
+        if: always()
+      - name: Rename report file
+        run: mv reports/jest/report.html reports/jest/unit_${{ github.sha }}.html
+        if: always()
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        if: always()
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: 'reports/jest'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        if: always()
+      - name: Report URL
+        run: echo "${{ steps.deployment.outputs.page_url }}unit_${{ github.sha }}.html"
+        if: always()

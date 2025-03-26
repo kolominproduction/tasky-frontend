@@ -6,6 +6,6 @@ describe('Test', () => {
   test('Test render component', async () => {
     render(<TestComponent prop="Text" />);
 
-    expect(screen.getByText('Testing component')).toBeInTheDocument();
+    expect(screen.getByText('Test component!')).toBeInTheDocument();
   });
 });

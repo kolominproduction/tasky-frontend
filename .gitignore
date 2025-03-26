@@ -1,5 +1,6 @@
 build
 node_modules
+reports/jest
 .env
 .env.development
 .env.production
