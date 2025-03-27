@@ -1,3 +1,5 @@
+import styles from './Button.module.css';
+
 export const Button = () => {
-  return <button></button>;
+  return <button className={styles.button}>Кнопка</button>;
 };
