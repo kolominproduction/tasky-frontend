@@ -17,6 +17,7 @@ export const webpackLoaders = (options: WebpackOptions): ModuleOptions['rules'] 
             auto: true,
             localIdentName: isDev ? '[path][name]__[local]--[hash:base64:8]' : '[hash:base64:8]',
           },
+          esModule: false,
         },
       },
       'postcss-loader',

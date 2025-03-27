@@ -6,3 +6,4 @@ reports/jest
 .env.production
 
 .vscode
+*storybook.log
