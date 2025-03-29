@@ -6,6 +6,7 @@ export const webpackOutput = (options: WebpackOptions): Configuration['output'] 
   return {
     filename: '[name].[contenthash].js',
     path: options.paths.output,
+    publicPath: '/',
     clean: true,
   };
 };

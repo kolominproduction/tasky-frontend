@@ -1,6 +1,7 @@
 build
 node_modules
 reports/jest
+reports/storybook
 .env
 .env.development
 .env.production
